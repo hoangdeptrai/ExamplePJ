@@ -24,7 +24,7 @@ namespace Example.Model.Models
         public int CategoryID { set; get; }
 
         [ForeignKey("CategoryID")]
-        public virtual ProductCategory Products { set; get; }
+        public virtual ProductCategory ProductCategory { set; get; }
 
         public string Image { set; get; }
         public XElement MoreImage { set; get; }
