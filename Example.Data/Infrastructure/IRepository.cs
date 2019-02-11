@@ -6,32 +6,33 @@ namespace Example.Data.Infrastructure
 {
     public interface IRepository<T> where T : class
     {
-        T Add(T entity);
+        // Marks an entity as new
+        void Add(T entity);
 
+        // Marks an entity as modified
         void Update(T entity);
 
-        T Delete(T entity);
+        // Marks an entity to be removed
+        void Delete(T entity);
 
-        T Delete(long id);
+        void Delete(int id);
 
+        //Delete multi records
         void DeleteMulti(Expression<Func<T, bool>> where);
 
-        T GetSingleById(long id);
+        // Get an entity by int id
+        T GetSingleById(int id);
 
-        T GetSingleById(string id);
+        T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
 
-        IQueryable<T> GetAll(string[] sort = null, string sortType = "");
+        IQueryable<T> GetAll(string[] includes = null);
 
-        IQueryable<T> GetAll(Expression<Func<T, bool>> filter, string[] includes = null, string[] sort = null, string sortType = "");
+        IQueryable<T> GetMulti(Expression<Func<T, bool>> predicate, string[] includes = null);
 
-        IQueryable<T> GetPaging(Expression<Func<T, bool>> filter, string[] sort, out int total, out int itemStart, out int itemEnd, int index = 0, int size = 50, bool notPading = false, string[] includes = null);
+        IQueryable<T> GetMultiPaging(Expression<Func<T, bool>> filter, out int total, int index = 0, int size = 50, string[] includes = null);
 
         int Count(Expression<Func<T, bool>> where);
 
-        T GetFirstOrDefault(Expression<Func<T, bool>> fillter);
-
         bool CheckContains(Expression<Func<T, bool>> predicate);
-
-            
     }
 }

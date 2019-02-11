@@ -1,10 +1,10 @@
 ﻿using Example.Data.Infrastructure;
 using Example.Model.Models;
-using TeduShop.Data.Infrastructure;
+using Example.Data.Infrastructure;
 
 namespace Example.Data.Repositories
 {
-    public interface IOrderRepository
+    public interface IOrderRepository : IRepository<Order>
     {
     }
 

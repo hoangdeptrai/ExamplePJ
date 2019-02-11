@@ -1,10 +1,9 @@
 ﻿using Example.Data.Infrastructure;
 using Example.Model.Models;
-using TeduShop.Data.Infrastructure;
 
 namespace Example.Data.Repositories
 {
-    public interface IFooterRepository
+    public interface IFooterRepository : IRepository<Footer>
     {
     }
 

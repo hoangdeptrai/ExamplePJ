@@ -1,17 +1,16 @@
-﻿using Example.Data;
-using Example.Data.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TeduShop.Data.Infrastructure
+namespace Example.Data.Infrastructure
 {
-    public abstract class RepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T> : IRepository<T> where T : class
     {
         #region Properties
-
         private ExampleDbContext dataContext;
         private readonly IDbSet<T> dbSet;
 
@@ -25,8 +24,7 @@ namespace TeduShop.Data.Infrastructure
         {
             get { return dataContext ?? (dataContext = DbFactory.Init()); }
         }
-
-        #endregion Properties
+        #endregion
 
         protected RepositoryBase(IDbFactory dbFactory)
         {
@@ -35,7 +33,6 @@ namespace TeduShop.Data.Infrastructure
         }
 
         #region Implementation
-
         public virtual void Add(T entity)
         {
             dbSet.Add(entity);
@@ -51,7 +48,11 @@ namespace TeduShop.Data.Infrastructure
         {
             dbSet.Remove(entity);
         }
-
+        public virtual void Delete(int id)
+        {
+            var entity = dbSet.Find(id);
+            dbSet.Remove(entity);
+        }
         public virtual void DeleteMulti(Expression<Func<T, bool>> where)
         {
             IEnumerable<T> objects = dbSet.Where<T>(where).AsEnumerable();
@@ -68,6 +69,7 @@ namespace TeduShop.Data.Infrastructure
         {
             return dbSet.Where(where).ToList();
         }
+
 
         public virtual int Count(Expression<Func<T, bool>> where)
         {
@@ -134,7 +136,6 @@ namespace TeduShop.Data.Infrastructure
         {
             return dataContext.Set<T>().Count<T>(predicate) > 0;
         }
-
-        #endregion Implementation
+        #endregion
     }
 }
