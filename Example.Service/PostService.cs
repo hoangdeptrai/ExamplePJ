@@ -3,6 +3,7 @@ using Example.Data.Repositories;
 using Example.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Example.Service
 {
@@ -27,8 +28,8 @@ namespace Example.Service
 
     public class PostService : IPostService
     {
-        IPostRepository _postRepository;
-        IUnitOfWork _unitOfWork;
+        private IPostRepository _postRepository;
+        private IUnitOfWork _unitOfWork;
 
         public PostService(IPostRepository postRepository, IUnitOfWork unitOfWork)
         {
@@ -38,21 +39,22 @@ namespace Example.Service
 
         public void Add(Post post)
         {
-            throw new NotImplementedException();
+            _postRepository.Add(post);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _postRepository.Delete(id);
         }
 
         public IEnumerable<Post> GetAll()
         {
-            throw new NotImplementedException();
+            return _postRepository.GetAll(new string[] { "PostCategory" });
         }
 
-        public IEnumerable<Post> GetAllByTagPaging()
+        public IEnumerable<Post> GetAllByTagPaging(string tag,int page, int pageSize, out int totalRow)
         {
+            //return _postRepository.GetMultiPaging(x=>x.Status);
             throw new NotImplementedException();
         }
 

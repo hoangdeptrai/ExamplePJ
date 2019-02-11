@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Example.Model.Models
@@ -16,9 +17,15 @@ namespace Example.Model.Models
         public string Image { set; get; }
         public string Content { set; get; }
         public string Description { set; get; }
-
+        
         public bool? HomeFlag { set; get; }
         public bool? HotFlaf { set; get; }
         public int? ViewCount { set; get; }
+
+        [ForeignKey("CategoryID")]
+        public virtual PostCategory PostCategory { set; get; }
+
+        [ForeignKey("CategoryID")]
+        public virtual IEnumerable<PostTag> PostTags { set; get; }
     }
 }
