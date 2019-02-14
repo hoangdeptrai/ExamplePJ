@@ -3,15 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Example.Model.Models
 {
-    [Table("Products")]
+    [Table("ProductTags")]
     public class ProductTag
     {
         [Key]
+        [Column(Order = 1)]
         public int ProductID { set; get; }
 
         [Key]
-        [Column(TypeName = "varchar")]
-        [MaxLength(50)]
+        [Column(Order = 2)]
         public string TagID { set; get; }
 
         [ForeignKey("ProductID")]
