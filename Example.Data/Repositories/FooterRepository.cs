@@ -3,11 +3,11 @@ using Example.Model.Models;
 
 namespace Example.Data.Repositories
 {
-    public interface IFooterRepository : IRepository<Footer>
+    public interface IRepository : IRepository<Footer>
     {
     }
 
-    public class FooterRepository : RepositoryBase<Footer>, IFooterRepository
+    public class FooterRepository : RepositoryBase<Footer>, IRepository
     {
         public FooterRepository(DbFactory dbFactory) : base(dbFactory)
         {
